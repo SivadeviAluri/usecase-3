@@ -9,7 +9,7 @@ pipeline {
         }
     }
     stage('Build Docker images in parallel') {
-        parallel{
+        parallel {
             stage('Build python image'){
                 steps{
                     dir('python')
