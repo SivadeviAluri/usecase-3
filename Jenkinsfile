@@ -1,5 +1,5 @@
-pipeline{
-    angent any
+pipeline {
+    agent any
 
     stages {
         stage('Clone Repository'){
@@ -8,7 +8,7 @@ pipeline{
             }
         }
     }
-    stage('Build Docker images in parallel'){
+    stage('Build Docker images in parallel') {
         parallel{
             stage('Build python image'){
                 steps{
@@ -32,7 +32,7 @@ pipeline{
             }
         }
     }
-    stage('Push to Dockerhub'){
+    stage('Push to Dockerhub') {
         steps{
             sh """
             docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
