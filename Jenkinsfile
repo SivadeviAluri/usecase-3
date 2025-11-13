@@ -8,7 +8,7 @@ pipeline {
             }
         }
     }
-    stage('Build Docker images in parallel') {
+       stage('Build Docker images in parallel') {
         parallel {
             stage('Build python image'){
                 steps{
@@ -32,14 +32,14 @@ pipeline {
             }
         }
     }
-    stage('Push to Dockerhub') {
-        steps{
-            sh """
-            docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
-            docker push devi819/python_image:latest
-            docker push devi819/java_image:latest
-            docker push devi819/nginx_image:latest
-            """
+         stage('Push to Dockerhub') {
+              steps{
+                  sh """
+                       docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
+                       docker push devi819/python_image:latest
+                       docker push devi819/java_image:latest
+                       docker push devi819/nginx_image:latest
+                   """
         }
         environment{
            DOCKERHUB_CREDENTIALS = credentials('hello') 
