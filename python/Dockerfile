@@ -1,7 +1,6 @@
-FROM python:3.9-slim
-RUN apt update
-RUN pip install flask
+FROM python:3.9
 WORKDIR /app
-COPY ..
+COPY . /app
+RUN pip install flask
 EXPOSE 8080
 CMD ["python", "app.py"]
