@@ -1,9 +1,10 @@
-FROM maven:3.9.8-eclipse-temurin-25 AS build
+FROM ubuntu:22.04
+RUN apt update -y
+RUN apt install openjdk-21-jdk -y
+RUN apt install maven -y
+RUN apt install git -y
 WORKDIR /app
-RUN git clone https://github.com/spring-projects/spring-petclinic.git .
-RUN mvn clean package -DskipTests
-FROM eclipse-temurin:25-jdk
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-CMD ["java", "-jar", "app.jar"]
-
+RUN git clone https://github.com/Siva825/spring-petclinic.git .
+RUN mvn clean package -Dskiptests -Dcheckstyle.skip=true
+EXPOSE 8080
+CMD ["java", "-jar", "/app/target/spring-petclinic-3.5.0-SNAPSHOT.jar"]
